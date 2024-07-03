@@ -20,6 +20,12 @@ const startServer = async () => {
         server.listen(config.PORT, () => {
             logger.info(`Server listening on port ${config.PORT}`);
         });
+
+        // Tiempos de espera en el servidor
+        server.timeout = 30000;
+        server.keepAliveTimeout = 10000;
+        server.headersTimeout = 20000;
+        server.requestTimeout = 15000;
         
     } catch (error) {
         logger.error(error, `Error al intentar inicar el servidor`);
