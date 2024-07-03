@@ -1,4 +1,4 @@
-import { getAll, getById, create, updateById, deleteById } from '../services/archivo.service.js';
+import { getAll, getById, upload, updateFile, deleteById } from '../services/archivo.service.js';
 
 export const getAllFiles = async (req, res, next) => {
 
@@ -15,7 +15,9 @@ export const getAllFiles = async (req, res, next) => {
         });
         
     } catch (error) {
-        next(error);
+        const errorGetFiles = new Error(`Ocurrio un problema al obtener los archivos - ${error.message}`);
+        errorGetFiles.stack = error.stack; 
+        next(errorGetFiles);
     }
 
 };
@@ -28,7 +30,7 @@ export const getFileById = async (req, res, next) => {
         const { id } = req.params;
 
         // Obtenemos el archivo 
-        const file = await getById(id);
+        const file = await getById(req, id, res);
 
         // Respondemos al usuario
         res.status(200).json({
@@ -47,23 +49,23 @@ export const uploadFiles = async (req, res , next) => {
 
     try {
         
-        // Obtenemos el archivo
+        // Obtenemos los archivos a cargar 
         const { files } = req;
 
-        console.log(files);
-
-        // Registramos el nuevo archivo
-        // const newFile = await create(file);
+        // Cargamos los archivos
+        const filesLoaded = await upload(files, res);
 
         // Respondemos al usuario
-        res.status(200).json({
-            success: true,
-            message: 'Archivo registrado exitosamente',
-            data: files.map(file => file.originalname)
+        return res.status(200).json({
+            success: false,
+            message: "Archivos cargados correctamente",
+            data: filesLoaded
         });
 
     } catch (error) {
-        next(error);
+        const errorUpload = new Error(`Ocurrio un problema al cargar los archivos - ${error.message}`);
+        errorUpload.stack = error.stack; 
+        next(errorUpload);
     }
 
 };
@@ -74,12 +76,11 @@ export const updateFileById = async (req, res , next) => {
         
         // Obtenemos el archivo
         const { 
-            params: { id },
             file 
         } = req;
 
         // Registramos el nuevo archivo
-        const newFile = await updateById(id, file);
+        const newFile = await updateFile(file, res);
 
         // Respondemos al usuario
         res.status(200).json({
@@ -102,13 +103,13 @@ export const deleteFileById = async (req, res, next) => {
         const { id } = req.params;
 
         // Eliminamos el archivo
-        const deletedFile = await deleteById(id);
+        const deletedFile = await deleteById(req, id, res);
 
         // Respondemos al usuario
         res.status(200).json({
             success: true,
             message: 'Archivo eliminado exitosamente',
-            data: deleteById
+            data: deletedFile
         });
         
     } catch (error) {
