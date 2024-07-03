@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import pino from 'pino';
 import pino_http from 'pino-http';
 import logger from './libs/logger.js';
+import errorHandler from './middlewares/errorHandler.js';
 
 // Importar las rutas
 import fileRoutes from './routes/archivo.routes.js';
@@ -68,6 +69,10 @@ app.all('*', (req, res) => {
     }
 
 });
+
+
+// Middleware de manejo de errores
+app.use(errorHandler);
 
 
 // Exportamos la aplicación

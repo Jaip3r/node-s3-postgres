@@ -43,21 +43,23 @@ export const getFileById = async (req, res, next) => {
 
 };
 
-export const createFile = async (req, res , next) => {
+export const uploadFiles = async (req, res , next) => {
 
     try {
         
         // Obtenemos el archivo
-        const { file } = req;
+        const { files } = req;
+
+        console.log(files);
 
         // Registramos el nuevo archivo
-        const newFile = await create(file);
+        // const newFile = await create(file);
 
         // Respondemos al usuario
         res.status(200).json({
             success: true,
             message: 'Archivo registrado exitosamente',
-            data: newFile
+            data: files.map(file => file.originalname)
         });
 
     } catch (error) {
