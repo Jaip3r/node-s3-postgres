@@ -4,6 +4,10 @@ import pino from 'pino';
 import pino_http from 'pino-http';
 import logger from './libs/logger.js';
 
+// Importar las rutas
+import fileRoutes from './routes/archivo.routes.js';
+
+
 // Contexto principal de la aplicación
 const app = express();
 
@@ -48,10 +52,8 @@ app.use(pino_http({
 
 }));
 
-
-app.get('/', (req, res) => {
-    res.json({ message: "Hola mundo" });
-});
+// Rutas
+app.use('/api/v1/archivos', fileRoutes);
 
 
 // En caso de acceder a una ruta no especificada
