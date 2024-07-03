@@ -17,15 +17,6 @@ const Archivo = sequelize.define('Archivos', {
             name: 'file_name',
             msg: "El nombre de archivo proporcionado ya se encuentra registrado"
         }
-    },
-    imageKey: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate:{
-            isUrl: {
-                msg: "Favor proporcionar una url de archivo válida"
-            }
-        }
     }
 }, {
     timestamps: true
