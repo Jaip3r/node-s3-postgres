@@ -28,8 +28,8 @@ router.get('/:id', getFileById);
 router.post('/', [upload.array("files", 4), filePayloadExists, fileExtLimiter("application/pdf"), fileSizeLimiter], uploadFiles);
 
 // @desc Endpoint encargado de la actualización de un archivo
-// @route PATCH /api/v1/archivos/:id
-router.patch('/:id', [upload.single("file"), filePayloadExists, fileExtLimiter("application/pdf"), fileSizeLimiter], updateFileById);
+// @route PATCH /api/v1/archivos
+router.patch('/', [upload.single("file"), filePayloadExists, fileExtLimiter("application/pdf"), fileSizeLimiter], updateFileById);
 
 // @desc Endpoint encargado de la eliminación de un archivo
 // @route DELETE /api/v1/archivos/:id
