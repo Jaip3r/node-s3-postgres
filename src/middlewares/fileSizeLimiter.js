@@ -27,7 +27,7 @@ const fileSizeLimiter = (req, res, next) => {
     } else if (multipleFiles) {
 
         // Caso de múltiples archivos
-        const oversizedFiles = files.filter(file => file.size > FILE_SIZE_LIMIT)
+        const oversizedFiles = multipleFiles.filter(file => file.size > FILE_SIZE_LIMIT)
                 .map(file => file.originalname)
                 .join(', ');
 

@@ -10,9 +10,10 @@ const errorHandler = (error, req, res, next) => {
         });
     }
 
-    return res.status(400).json({
+    req.log.error(error, `Error inesperado: ${error.message}`);
+    return res.status(500).json({
         success: false,
-        message: "Ocurrió un error: " + error.message,
+        message: error.message,
         data: null
     });
 
