@@ -1,6 +1,7 @@
 import app from "./app.js";
 import http from "node:http";
 import config from "./config/config.js";
+import logger from "./libs/logger.js";
 
 // Creamos el servidor
 const server = http.createServer(app);
@@ -12,11 +13,11 @@ const startServer = () => {
 
         // Inicializar el servidor
         server.listen(config.PORT, () => {
-            console.log(`Server listening on port ${config.PORT}`);
+            logger.info(`Server listening on port ${config.PORT}`);
         });
         
     } catch (error) {
-        console.log(error);
+        logger.error(error, `Error al intentar inicar el servidor`);
         process.exit(1);
     }
 
