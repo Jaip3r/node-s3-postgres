@@ -4,8 +4,9 @@ export default {
     AWS_PUBLIC_KEY: process.env.AWS_PUBLIC_KEY,
     AWS_SECRET_KEY: process.env.AWS_SECRET_KEY,
     DATABASE: process.env.DATABASE,
-    USERNAME: process.env.USERNAME,
+    USERNAME: process.env.USER_DB,
     PASSWORD: process.env.PASSWORD,
     HOST: process.env.HOST || "localhost", 
-    PORT: process.env.PORT || 3000
+    PORT: process.env.PORT || 3000,
+    DB_PORT: process.env.DB_PORT
 }
