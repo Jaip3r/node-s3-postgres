@@ -4,6 +4,9 @@ import config from "./config/config.js";
 import logger from "./libs/logger.js";
 import sequelize from "./config/db.js";
 
+// Importamos el modelo
+import Archivo from "./models/Archivo.js";
+
 // Creamos el servidor
 const server = http.createServer(app);
 
@@ -13,7 +16,7 @@ const startServer = async () => {
     try {
 
         // Probar conexión
-        await sequelize.authenticate();
+        await sequelize.sync();
         logger.info("Conectado a la BD")
 
         // Inicializar el servidor
