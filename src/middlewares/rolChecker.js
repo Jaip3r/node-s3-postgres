@@ -45,10 +45,7 @@ export const rolChecker = (allowedRoles) => {
 
             const {email, password} = req.body
             console.log(email, password);
-            console.log("CUERPO SOLICITUD: " + JSON.stringify(req.body, null, 2));
-            req.body.forEach((value, key) => {
-                console.log(`${key} : ${value}`);
-            });
+            console.log("CUERPO SOLICITUD: " + JSON.stringify(req, null, 2));
             const response = await getRoleFromUser(email, password)
 
             if (allowedRoles.includes(response.data.role)) {
