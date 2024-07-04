@@ -25,8 +25,8 @@ export const getAll = async () => {
 
             // Generar una URL firmada del archivo
             const params = {
-            Bucket: config.AWS_BUCKET_NAME,
-            Key: archivo.nombre
+                Bucket: config.AWS_BUCKET_NAME,
+                Key: archivo.nombre
             };
 
             const command = new GetObjectCommand(params);
