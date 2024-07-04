@@ -41,7 +41,7 @@ export const rolChecker = (allowedRoles) => {
         try {
 
             const {email, password} = req.body
-            const response = await getRoleFromUser(res, email, password)
+            const response = await getRoleFromUser(email, password)
             req.log.info(response);
 
             if (allowedRoles.includes(response.data.role)) {
