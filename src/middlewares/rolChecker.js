@@ -18,10 +18,10 @@ const getRoleFromUser = async (email, password) => {
 
         const response = await axios.post("https://microauth-k8bm.onrender.com/api/auth/verifyPermits", body, {
             headers: {
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJsdWlzQGx1aXMuY29tIiwibm9tYnJlIjoiTHVpcyIsInRpcG8iOiJJbnZlcnNvciIsImlhdCI6MTcyMDA2NjA3MywiZXhwIjoxNzIwMzI1MjczfQ.EQ8jhdMiFzgnzgcPDwyzZhRufvHzAcs5FUYva9dPWq4"
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJsdWlzQGx1aXMuY29tIiwibm9tYnJlIjoiTHVpcyIsInRpcG8iOiJJbnZlcnNvciIsImlhdCI6MTcyMDA2NjQ4NSwiZXhwIjoxNzIwMzI1Njg1fQ.WajEcopadxj6nQ_WjVlK9peVgDqqPyml1evUTfb6LfI"
             }
         })
-        console.log(response);
+        req.log.info(response);
 
         return response
 
@@ -42,7 +42,7 @@ export const rolChecker = (allowedRoles) => {
 
             const {email, password} = req.body
             const response = await getRoleFromUser(res, email, password)
-            console.log(response);
+            req.log.info(response);
 
             if (allowedRoles.includes(response.data.role)) {
                 next()
