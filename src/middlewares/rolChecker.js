@@ -16,11 +16,7 @@ const getRoleFromUser = async (email, password) => {
             password: password
         }
 
-        const response = await axios.post("https://microauth-k8bm.onrender.com/api/auth/verifyPermits", body, {
-            headers: {
-                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJsdWlzQGx1aXMuY29tIiwibm9tYnJlIjoiTHVpcyIsInRpcG8iOiJJbnZlcnNvciIsImlhdCI6MTcyMDA1MjM0NSwiZXhwIjoxNzIwMzExNTQ1fQ.YyoikSXuchyW2BTJuP3i0pplGoVKuNfVuLgwr3l27D0`
-            }
-        })
+        const response = await axios.post("https://microauth-k8bm.onrender.com/api/auth/verifyPermits", body)
 
         return response
 
@@ -57,7 +53,7 @@ export const rolChecker = (allowedRoles) => {
                 message: e,
                 data: null
             });
-            
+
         }
 
     }
