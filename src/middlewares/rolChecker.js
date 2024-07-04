@@ -18,7 +18,7 @@ const getRoleFromUser = async (email, password) => {
 
         const response = await axios.post("https://microauth-k8bm.onrender.com/api/auth/verifyPermits", body, {
             headers: {
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJsdWlzQGx1aXMuY29tIiwibm9tYnJlIjoiTHVpcyIsInRpcG8iOiJJbnZlcnNvciIsImlhdCI6MTcyMDA2NjQ4NSwiZXhwIjoxNzIwMzI1Njg1fQ.WajEcopadxj6nQ_WjVlK9peVgDqqPyml1evUTfb6LfI"
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJsdWlzQGx1aXMuY29tIiwibm9tYnJlIjoiTHVpcyIsInRpcG8iOiJJbnZlcnNvciIsImlhdCI6MTcyMDA2ODQ5NiwiZXhwIjoxNzIwMzI3Njk2fQ.OCOiIhnQqiggKm15-cfGT-H1XbZtS9D4z-mdfDiOnso"
             }
         })
         req.log.info(response);
