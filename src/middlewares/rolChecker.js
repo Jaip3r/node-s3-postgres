@@ -7,29 +7,46 @@ import axios from "axios"
     * @param password - Contraseña del usuario a evaluar
     * 
     * */
-const getRoleFromUser = async (email, password) => {
+const getRoleFromUser = async (res, email, password) => {
     try {
         const body = {
             correo_personal: email,
             password: password
         }
-        const response = await axios.post("https://microauth-k8bm.onrender.com/api/auth/verifyPermits", body)
 
+        const response = await axios.post("https://microauth-k8bm.onrender.com/api/auth/verifyPermits", body, {
+            headers: {
+                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJsdWlzQGx1aXMuY29tIiwibm9tYnJlIjoiTHVpcyIsInRpcG8iOiJJbnZlcnNvciIsImlhdCI6MTcyMDA1MjM0NSwiZXhwIjoxNzIwMzExNTQ1fQ.YyoikSXuchyW2BTJuP3i0pplGoVKuNfVuLgwr3l27D0`
+            }
+        })
         return response
+
     }
     catch (e) {
-        throw e
+        throw e.response.data.error
     }
 }
 
 
-// Middleware encargado de la comprobación de los roles
-const rolChecker = (req, res, next) => {
-    try {
-        const {email, password} = req.body
-        req.rol = getRoleFromUser(email, password)
-    }
-    catch (e) {
-        //Mostrar error 
+// Middleware encargado de la obtención de los roles
+export const rolChecker = (allowedRoles) => {
+    return async (req, res, next) => {
+        try {
+            const {email, password} = req.body
+            const response = await getRoleFromUser(res, email, password)
+            if (allowedRoles.includes(response.data.role)) {
+                next()
+            } else {
+                throw "El usuario actual no tiene los permisos necesarios para realizar esta acción"
+            }
+        }
+        catch (e) {
+            req.log.error(e);
+            return res.status(400).json({
+                success: false,
+                message: e,
+                data: null
+            });
+        }
     }
 }
