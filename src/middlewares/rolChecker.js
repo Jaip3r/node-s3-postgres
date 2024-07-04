@@ -17,6 +17,7 @@ const getRoleFromUser = async (email, password) => {
         }
 
         const response = await axios.post("https://microauth-k8bm.onrender.com/api/auth/verifyPermits", body)
+        console.log(response);
 
         return response
 
@@ -37,6 +38,7 @@ export const rolChecker = (allowedRoles) => {
 
             const {email, password} = req.body
             const response = await getRoleFromUser(res, email, password)
+            console.log(response);
 
             if (allowedRoles.includes(response.data.role)) {
                 next()
