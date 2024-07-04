@@ -26,11 +26,11 @@ router.get('/:id', rolChecker(["Administrador", "Inversor", "Asegurador"]), getF
 
 // @desc Endpoint encargado del registro de un nuevo archivo
 // @route POST /api/v1/archivos
-router.post('/', [rolChecker(["Administrador", "Inversor"]), upload.array("files", 4), filePayloadExists, fileExtLimiter("application/pdf"), fileSizeLimiter], uploadFiles);
+router.post('/', upload.array("files", 4), [rolChecker(["Administrador", "Inversor"]), filePayloadExists, fileExtLimiter("application/pdf"), fileSizeLimiter], uploadFiles);
 
 // @desc Endpoint encargado de la actualización de un archivo
 // @route PATCH /api/v1/archivos
-router.patch('/', [rolChecker(["Administrador", "Inversor"]), upload.single("file"), filePayloadExists, fileExtLimiter("application/pdf"), fileSizeLimiter], updateFileById);
+router.patch('/', upload.single("file"), [rolChecker(["Administrador", "Inversor"]), filePayloadExists, fileExtLimiter("application/pdf"), fileSizeLimiter], updateFileById);
 
 // @desc Endpoint encargado de la eliminación de un archivo
 // @route DELETE /api/v1/archivos/:id
