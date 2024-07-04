@@ -21,12 +21,13 @@ const getRoleFromUser = async (email, password) => {
                 "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJsdWlzQGx1aXMuY29tIiwibm9tYnJlIjoiTHVpcyIsInRpcG8iOiJJbnZlcnNvciIsImlhdCI6MTcyMDA2ODQ5NiwiZXhwIjoxNzIwMzI3Njk2fQ.OCOiIhnQqiggKm15-cfGT-H1XbZtS9D4z-mdfDiOnso"
             }
         })
-        req.log.info(response);
+        console.log("RESPUESTA1: " + response);
 
         return response
 
     }
     catch (e) {
+        console.log("ERRORRRRRRRRRRR:" + e);
         throw e.response.data.error
     }
 
@@ -42,7 +43,7 @@ export const rolChecker = (allowedRoles) => {
 
             const {email, password} = req.body
             const response = await getRoleFromUser(email, password)
-            req.log.info(response);
+            console.log("RESPUESTA2: " + response);
 
             if (allowedRoles.includes(response.data.role)) {
                 next()
